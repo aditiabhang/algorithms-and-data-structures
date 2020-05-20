@@ -150,6 +150,8 @@ def hybridSort(numList, first, last):
             hybridSort(numList, first, mid-1)
             hybridSort(numList, mid + 1, last)
 
+            return numList
+            
 def partition_for_hybrid(alist, first, last):
 	pivot = randint(first, last)
 	temp = alist[last]
@@ -317,7 +319,9 @@ for size in n:
 
     tot_time = 0.0
     for _ in range(samples):
-        a = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+        a = create_array(size,size)
+        b = sorted(a)
+        b.reverse()
         t0 = time()
         s = hybridSort(a, 0, len(a)-1)
         t1 = time()
@@ -364,7 +368,7 @@ for size in n:
     for _ in range(samples):
         a = create_array(size,size)
         t0 = time()
-        s = insertionSort(a, 0, len(a)-1)
+        s = insertionSort(sorted(a, 0, len(a)-1))
         t1 = time()
         tot_time += (t1 - t0)
     times['insertion'].append(tot_time/float(samples))
@@ -373,7 +377,7 @@ for size in n:
     for _ in range(samples):
         a = create_array(size,size)
         t0 = time()
-        s = heapSort(a)
+        s = heapSort(sorted(a))
         t1 = time()
         tot_time += (t1 - t0)
     times['heap'].append(tot_time/float(samples))
@@ -391,7 +395,7 @@ for size in n:
     for _ in range(samples):
         a = create_array(size,size)
         t0 = time()
-        s = hybridSort(a, 0, len(a)-1)
+        s = hybridSort(sorted(a, 0, len(a)-1))
         t1 = time()
         tot_time += (t1 - t0)
     times['hybrid'].append(tot_time/float(samples))

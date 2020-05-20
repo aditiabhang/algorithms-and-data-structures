@@ -1,3 +1,7 @@
+# THIS CODE IS USED FOR FIGURING OUT THE CODE #
+# THERE IS NOTHING MUCH TO IT
+#--------------------------------------------------
+
 # random_list = [3, 43, 21, 65, 91, 36, 66, 33, 99, 77]
 # partially_sorted_list = [3, 21, 33, 36, 43, 99, 77, 66, 65, 91]
 # sorted_list = [3, 21, 33, 36, 43, 65, 66, 77, 91, 99]

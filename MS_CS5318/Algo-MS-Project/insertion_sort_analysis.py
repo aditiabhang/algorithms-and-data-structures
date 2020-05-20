@@ -1,3 +1,7 @@
+# THIS CODE IS USED FOR FIGURING OUT THE CODE #
+# THERE IS NOTHING MUCH TO IT
+#--------------------------------------------------
+
 import time 
 from numpy.random import seed 
 from numpy.random import randint 

@@ -1,9 +1,8 @@
+# THIS CODE IS USED FOR FIGURING OUT THE CODE #
+# THERE IS NOTHING MUCH TO IT
+#--------------------------------------------------
 # Python Code for Implementation and running time Algorithm 
 # Complexity plot of Heap Sort 
-
-# This python code intends to implement Heap Sort Algorithm 
-# Plots its time Complexity on list of different sizes 
-
 
 import time 
 from numpy.random import seed 

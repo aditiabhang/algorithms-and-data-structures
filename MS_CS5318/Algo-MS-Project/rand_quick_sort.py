@@ -1,3 +1,7 @@
+# THIS CODE IS USED FOR FIGURING OUT THE CODE #
+# THERE IS NOTHING MUCH TO IT
+#--------------------------------------------------
+
 from random import randint
 
 def rand_quicksort(alist, start, end):

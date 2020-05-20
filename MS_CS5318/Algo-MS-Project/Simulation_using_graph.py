@@ -9,27 +9,27 @@ def create_array(size=10, max=50):
     return [randint(0,max) for _ in range(size)]
 
 # ---------- INSERTION SORT ----------
-def insertionSort(arr): 
+def insertionSort(a): 
   
     # Traverse through 1 to len(arr) 
-    for i in range(1, len(arr)): 
+    for i in range(1, len(a)): 
   
-        key = arr[i] 
+        key = a[i] 
   
         # Move elements of arr[0..i-1], that are 
         # greater than key, to one position ahead 
         # of their current position 
         j = i-1
-        while j >=0 and key < arr[j] : 
-                arr[j+1] = arr[j] 
+        while j >=0 and key < a[j] : 
+                a[j+1] = a[j] 
                 j -= 1
-        arr[j+1] = key 
+        a[j+1] = key 
 # ---------- QUICK SORT ----------
 def quickSort(a):
     if len(a) <= 1:
         return a
     smaller,equal,larger = [], [], []
-    pivot= a[randint(0, len(a)-1)]
+    pivot= a[len(a)-1]
 
     for x in a:
         if x < pivot:
@@ -68,11 +68,11 @@ def partition(alist, start, end):
 	
 	return pIndex
 # ---------- HEAP SORT ----------
-# find left child of node i 
+# left child of node i 
 def left(i): 
 	return 2 * i + 1
 
-# find right child of node i 
+# right child of node i 
 def right(i): 
 	return 2 * i + 2
 
@@ -113,12 +113,13 @@ def heapSort(A):
 # ---------- MERGE SORT ----------
 def mergeSort(arr): 
 	if len(arr) >1: 
-		mid = len(arr)//2 #Finding the mid of the array 
-		L = arr[:mid] # Dividing the array elements 
-		R = arr[mid:] # into 2 halves 
+		mid = len(arr)//2 
+		L = arr[:mid]  
+		R = arr[mid:]  
 
-		mergeSort(L) # Sorting the first half 
-		mergeSort(R) # Sorting the second half 
+		# Sorting the first and second half 
+		mergeSort(L) 
+		mergeSort(R)  
 
 		i = j = k = 0
 		
@@ -151,25 +152,31 @@ def hybridSort(numList, first, last):
         if(sizeArr < m):
             insert_sort(numList, first, last)
         else:
-            mid = partition(numList, first, last)
+            mid = partition_for_hybrid(numList, first, last)
             hybridSort(numList, first, mid-1)
             hybridSort(numList, mid + 1, last)
 
-def partition(numList, first, last):
-    piv = numList[last]
-    i = first-1
-    for j in range(first,last):
-        if numList[j] < piv:
-            i += 1
-            temp = numList[i]
-            numList[i] = numList[j]
-            numList[j] = temp
+            return numList
 
-    tempo = numList[i+1]
-    numList[i+1] = numList[last]
-    numList[last] = tempo
+def partition_for_hybrid(alist, first, last):
+	pivot = randint(first, last)
+	temp = alist[last]
+	alist[last] = alist[pivot]
+	alist[pivot] = temp
+	mid = first
+	
+	for i in range(first, last):
+		if alist[i] <= alist[last]:
+			temp = alist[i]
+			alist[i] = alist[mid]
+			alist[mid] = temp
+			mid += 1
 
-    return i+1
+	temp1 = alist[last]
+	alist[last] = alist[mid]
+	alist[mid] = temp1
+	
+	return mid
 
 def insert_sort(numList, first, last):
     for x in range(first, last):
@@ -181,6 +188,8 @@ def insert_sort(numList, first, last):
         numList[y+1] = key
     return numList
 #---------------------------------------------
+# Here we make lists of elements and time taken by each algorithm
+
 elements_quick = list() 
 times_quick = list() 
 for i in range(1, 10): 
@@ -242,7 +251,7 @@ for i in range(1, 10):
 	times_hybrid.append(end-start) 
 #------------------------------------------------
 # Here, we work with the data visualization part using subplots
-# style.use('fivethirtyeight')
+
 plt.style.use('ggplot')
 fig = plt.figure()
 
@@ -254,11 +263,11 @@ ax5 = fig.add_subplot(3,2,5)
 ax6 = fig.add_subplot(3,2,6)
 
 ax1 = plt.subplot2grid((16,23), (0,0), rowspan = 4, colspan = 10) 
-ax2 = plt.subplot2grid((16,23), (7,0), rowspan = 4, colspan = 10) 
-ax3 = plt.subplot2grid((16,23), (13,0), rowspan = 4, colspan = 10)
+ax2 = plt.subplot2grid((16,23), (6,0), rowspan = 4, colspan = 10) 
+ax3 = plt.subplot2grid((16,23), (12,0), rowspan = 4, colspan = 10)
 ax4 = plt.subplot2grid((16,23), (0,13), rowspan = 4, colspan = 10) 
-ax5 = plt.subplot2grid((16,23), (7,13), rowspan = 4, colspan = 10) 
-ax6 = plt.subplot2grid((16,23), (13,13), rowspan = 4, colspan = 10)
+ax5 = plt.subplot2grid((16,23), (6,13), rowspan = 4, colspan = 10) 
+ax6 = plt.subplot2grid((16,23), (12,13), rowspan = 4, colspan = 10)
 
 ax1.plot(elements_insertion, times_insertion, label = "InsertionSort")
 ax2.plot(elements_quick, times_quick, label = "Quick Sort")
@@ -275,5 +284,3 @@ ax5.legend()
 ax6.legend()
 
 plt.show()
-# plt3.set_xlabel('Length') 
-# plt3.set_ylabel('Time') 
